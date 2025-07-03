@@ -1,0 +1,32 @@
+<section class="send-form">
+  <input
+    type="text"
+    [ngModel]="text()"
+    (ngModelChange)="text.set($event)"
+    placeholder="Digite sua mensagem..."
+  />
+  <button (click)="enviar()">Enviar Notificação</button>
+</section>
+
+<section class="sent-list">
+  <h3>Notificações Enviadas</h3>
+  <ul *ngIf="sentList().length > 0; else noSent">
+    <li *ngFor="let item of sentList()">
+      <strong>{{ item.mensagemId }}</strong> – "{{ item.conteudo }}" →
+      <em>{{ lastStatus().get(item.mensagemId) || item.status }}</em>
+    </li>
+  </ul>
+  <ng-template #noSent>
+    <p>Nenhuma notificação enviada ainda.</p>
+  </ng-template>
+</section>
+
+<section class="events-log">
+  <h3>Log de Eventos de Status</h3>
+  <ul *ngIf="events().length > 0; else noEvents">
+    <li *ngFor="let evt of events()">{{ evt.mensagemId }} → {{ evt.status }}</li>
+  </ul>
+  <ng-template #noEvents>
+    <p>Nenhum evento recebido ainda.</p>
+  </ng-template>
+</section>
