@@ -1,60 +1,80 @@
 # ChallengeAngularRabbitmq
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
+Este projeto demonstra um desafio de front-end em Angular que consome um back-end via RabbitMQ e WebSocket para exibir atualizações em tempo real.
 
-## Development server
+## Sobre
 
-To start a local development server, run:
+Ao enviar uma notificação pelo formulário, o Angular:
+
+1. Gera um `mensagemId` (UUID)
+2. Publica no endpoint REST (`POST /api/notificar`)
+3. Recebe em tempo real, via WebSocket, eventos de status (`notificationStatus`) do back-end
+4. Atualiza a interface imediatamente com o histórico completo de status
+
+## Tecnologias
+
+- Angular 20
+- Socket.IO Client
+- RxJS / Signals
+- UUID
+- NgModel (FormsModule)
+
+## Como executar
 
 ```bash
+# Instale dependências
+npm install
+
+# Inicie o servidor de desenvolvimento
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Abra no navegador em `http://localhost:4200/`.
 
-## Code scaffolding
+## Principais comandos
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Gerar componente**
 
-```bash
-ng generate component component-name
+  ```bash
+  ng generate component components/nome-do-componente
+  ```
+
+- **Build de produção**
+
+  ```bash
+  ng build --configuration production
+  ```
+
+- **Testes unitários**
+
+  ```bash
+  ng test
+  ```
+
+- **Testes end-to-end**
+  Se configurado,
+
+  ```bash
+  ng e2e
+  ```
+
+## Estrutura
+
+```
+src/
+ ├─ app/
+ │   ├─ components/notification-status-component  # Form + lista + log WS
+ │   └─ services/notification.service.ts         # HTTP + WebSocket + Signals
+ └─ index.html                                   # <app-root>
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Contribuição
 
-```bash
-ng generate --help
-```
+1. Faça um fork do repositório
+2. Crie uma branch (`git checkout -b feature/x`)
+3. Faça suas alterações e commits
+4. Envie um pull request
 
-## Building
+---
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# challenge-angular-rabbitmq
+Desafio concluído: comunicação reativa em tempo real entre Angular e back-end usando WebSocket.
